@@ -35,10 +35,12 @@ const Registration = () => {
       </header>
       <main className="grid grid-rows-3" style={{gridTemplateRows:"auto 6px auto"}}>
         <div className="grid sm:grid-cols-3 grid-cols-1">
-            <div className="bg-primary w-full ">
-                hello
+            <div className="bg-primary text-tertiary w-full flex justify-center items-center ">
+                <span>
+                    Progress Bar
+                </span>
             </div>
-            <div className="bg-secondary p-[80px] px-[100px] col-span-2">
+            <div className="bg-secondary pt-[80px] pb-[130px] px-[100px] col-span-2">
                 <Aadhar/>
             </div>
         </div>
