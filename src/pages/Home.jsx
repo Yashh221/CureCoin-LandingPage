@@ -20,9 +20,12 @@ import rightArrow from "../assets/right-arrow.svg";
 import leftArrow from "../assets/left-arrow.svg";
 
 import Footer from "./Footer";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [domLoaded, setDomLoaded] = useState(false);
+
+  let navigate = useNavigate()
 
   useEffect(() => {
     setDomLoaded(true);
@@ -131,21 +134,22 @@ const Home = () => {
         {" "}
         <Header />
       </header>
-      <div className="grid grid-cols-3 w-full">
+      <div className="grid grid-cols-3 w-full mt-[75px]">
         <div className="sm:hidden block col-span-3">
           <img src={heroImg} className="w-[100%]" alt="" />
         </div>
-        <div className="sm:col-span-1 col-span-3 bg-primary flex flex-col space-y-8 justify-center px-10 pl-12 sm:pt-0 pt-[60px]">
-          <h1 className="text-[42px] text-[white] font-[800] font-sans leading-[1.1em] mb-4">
+        <div className="sm:col-span-1 col-span-3 bg-primary flex flex-col space-y-8 justify-center px-10 pl-12 sm:pt-0 pt-[60px] pb-5">
+          <h1 className="text-3xl lg:text-[42px] text-[white] font-[800] font-sans leading-[1.1em] mb-4">
             HEALTH CARE EMPOWERED
           </h1>
           <hr className="w-full bg-[white]" />
-          <p className="text-[25px] text-[white] tracking-widest leading-[40px]">
+          <p className=" text-xl lg:text-[25px] text-[white] tracking-widest leading-[40px]">
             Transforming <br />
             Healthcare Finance
           </p>
           <hr className="w-full mt-0 bg-[white]" />
-          <button className="px-4 py-2 bg-[#F8F7F3] hover:bg-secondary hover:text-white text-primary text-lg max-w-[230px] min-w-[230px] sm:m-0 m-auto mt-12 transition delay-50">
+          <button className="px-4 py-2 mb-4 bg-[#F8F7F3] hover:bg-secondary hover:text-white text-primary text-lg max-w-[230px] min-w-[230px] sm:m-0 m-auto mt-12 transition delay-50"
+          onClick={()=>navigate("/register")}>
             Get Started
           </button>
         </div>
@@ -157,7 +161,7 @@ const Home = () => {
       {/* Section 2 */}
       <div className="grid sm:grid-cols-3 grid-cols-1 bg-secondary text-[white] py-8">
         {section2Data.map((item, index) => (
-          <div className="col-span-1 p-[80px] text-center">
+          <div className="col-span-1 p-[25px] lg:p-[80px] text-center">
             <div className="flex justify-center">
               <img src={item.img} alt="" className="w-[100px]" />
             </div>
@@ -166,7 +170,7 @@ const Home = () => {
               <span>{item.title.split(" ")[1]}</span>
             </p>
 
-            <p className="text-lg px-5">{item.description}</p>
+            <p className="text-lg md:px-5">{item.description}</p>
           </div>
         ))}
       </div>
@@ -174,10 +178,10 @@ const Home = () => {
       {/* Section 3 */}
       {domLoaded && (
         <div className="container mx-auto px-3 py-8">
-          <h1 className="text-[45px] font-normal text-center text-primary tracking-wider">
+          <h1 className="text-2xl lg:text-[45px] font-normal py-8 text-center text-primary tracking-wider">
             SURGERIES MADE AFFORDABLE
           </h1>
-          <div className="max-w-[1200px] mx-auto py-8 pb-4">
+          <div className="max-w-[1200px] mx-auto py-10 pb-4">
             <Slider {...Settings} className=" w-full pb-[30px] px-14 sm:px-4">
               <div className="px-5">
                 <div
@@ -249,7 +253,7 @@ const Home = () => {
       {/* Section 4 */}
       <div className="bg-primary mt-10 py-12">
         <div className="container mx-auto px-3">
-          <h1 className="text-[45px] font-normal text-center text-[white] tracking-wider">
+          <h1 className="text-2xl lg:text-[45px] font-normal text-center text-[white] tracking-wider">
             HEALTHCARE PARTNERS
           </h1>
           <div className="grid grid-cols-4 px-14 py-6">
@@ -290,7 +294,7 @@ const Home = () => {
           <Slider {...Settings2}>
             <div>
               <div className="flex flex-col items-center justify-center">
-                <p className="md:w-[50%] w-[80%] text-center text-3xl tracking-wide">
+                <p className="md:w-[50%] w-[80%] text-center text-xl lg:text-3xl tracking-wide">
                   Testimonials are a great way to share positive feedback you
                   have received and encourage others to work with you. Add your
                   own here.
