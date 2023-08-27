@@ -1,8 +1,15 @@
 import React from "react";
+import YourDetails from "./YourDetails";
 
 const VerifyAadhar = ({ showVerifyAadhaar }) => {
   const [showVerifyAadhaarForm, setShowVerifyAadhaarForm] =
     React.useState(showVerifyAadhaar);
+    const [showDetails, setshowDetails] = React.useState(false)
+
+    const handleNextForm = () =>{
+        setShowVerifyAadhaarForm(false)
+        setshowDetails(true)
+    }
   return (
     <React.Fragment>
       {showVerifyAadhaarForm && (
@@ -17,7 +24,7 @@ const VerifyAadhar = ({ showVerifyAadhaar }) => {
             </span>
           </div>
           <form className="py-8">
-            <div className="flex h-[45px] max-w-[650px] border-2 border-solid border-tertiary w-full">
+            <div className="flex h-[48px] max-w-[650px] border-2 border-solid border-tertiary w-full">
               <input
                 type="numeric"
                 placeholder="OTP"
@@ -25,11 +32,15 @@ const VerifyAadhar = ({ showVerifyAadhaar }) => {
               />
             </div>
           </form>
-          <button className="w-[150px] h-[40px] mt-[180px] font-bold text-tertiary hover:text-red-600 bg-red-600 hover:bg-tertiary text-lg">
+          <button className="w-[150px] h-[40px] mt-[148px] font-bold text-tertiary hover:text-red-600 bg-red-600 hover:bg-tertiary text-lg"
+          onClick={handleNextForm}>
             Verify
           </button>
         </div>
       )}
+      {
+        showDetails && <YourDetails showDetails={showDetails}/>
+      }
     </React.Fragment>
   );
 };
