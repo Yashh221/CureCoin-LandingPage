@@ -18,11 +18,13 @@ import "react-18-image-lightbox/style.css";
 
 import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
+import { BsChevronUp } from "react-icons/bs";
 
 const Home = () => {
   const [domLoaded, setDomLoaded] = useState(false);
+  const [upButton, setUpButton] = useState(false);
 
-  let navigate = useNavigate()
+  let navigate = useNavigate();
 
   useEffect(() => {
     setDomLoaded(true);
@@ -38,7 +40,10 @@ const Home = () => {
   );
   const nextArrow = (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-      <path fill="#ffffff" d="M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z" />
+      <path
+        fill="#ffffff"
+        d="M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z"
+      />
     </svg>
   );
 
@@ -59,10 +64,12 @@ const Home = () => {
         style={arrowStyles}
       />
     ),
-    prevArrow: <GrPrevious
-    className=" z-10 ring-1 ring-black hover:ring-[#000000] hover:shadow-md"
-    style={arrowStyles}
-  />,
+    prevArrow: (
+      <GrPrevious
+        className=" z-10 ring-1 ring-black hover:ring-[#000000] hover:shadow-md"
+        style={arrowStyles}
+      />
+    ),
   };
 
   const Settings2 = {
@@ -77,7 +84,6 @@ const Home = () => {
       color: "#ffffff",
       width: "40px",
     },
-    
   };
 
   const section2Data = [
@@ -101,12 +107,17 @@ const Home = () => {
     },
   ];
   const [isScrolled, setIsScrolled] = useState(false);
+  let timeout;
 
   const handleScroll = () => {
     if (window.scrollY > 500) {
       setIsScrolled(true);
+      setUpButton(true);
+      clearTimeout(timeout);
+      timeout = setTimeout(() => setUpButton(false), 1000);
     } else {
       setIsScrolled(false);
+      setUpButton(false);
     }
   };
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -123,8 +134,12 @@ const Home = () => {
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      clearTimeout(timeout);
     };
   }, []);
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <div className="w-full overflow-x-hidden">
       {/* Section 1 */}
@@ -137,20 +152,24 @@ const Home = () => {
       </header>
       <div className="grid grid-cols-3 w-full mt-[75px]">
         <div className="sm:hidden block col-span-3">
-          <img src={heroImg} className="w-[100%]" alt="" />
+          <img src={heroImg} className="w-[100%] h-[300px]" alt="" />
         </div>
         <div className="sm:col-span-1 col-span-3 bg-[royalblue] flex flex-col space-y-8 justify-center text-center sm:text-left tracking-wider px-14 sm:pl-12 sm:pt-0 pt-[60px] pb-14 sm:pb-5">
           <h1 className="text-4xl lg:text-[42px] text-[white] font-[1000] font-sans leading-[1.1em]">
             HEALTH CARE EMPOWERED
           </h1>
-          <hr className="bg-[white] -mb-5" />
-          <p className=" text-lg sm:text-xl lg:text-[25px] text-[white] tracking-wider align-top place-content-start sm:tracking-widest t-0 leading- sm:leading-[40px] -my-4">
-            Transforming <br />
-            Healthcare Finance
-          </p>
-          <hr className="-mt-8 sm:mt-0 bg-[white]" />
-          <button className="px-4 py-2 mb-[50px] sm:mb-4 bg-[#F8F7F3]  hover:bg-secondary hover:text-white text-[royalblue] text-base sm:text-lg max-w-[230px] min-w-[230px] sm:m-0 m-auto mt-12 transition delay-50"
-          onClick={()=>navigate("/register/aadhaar")}>
+          <div className="-mt-1">
+            <hr className="bg-[white] mb-3" />
+            <p className="text-lg sm:text-xl lg:text-[25px] text-[white] tracking-wider align-top place-content-start sm:tracking-widest t-0 leading- sm:leading-[40px] my-0">
+              Transforming <br />
+              Healthcare Finance
+            </p>
+            <hr className="mt-3 bg-[white]" />
+          </div>
+          <button
+            className="px-4 py-2 mb-[50px] sm:mb-4 bg-[#F8F7F3] hover:bg-secondary hover:text-white text-[royalblue] text-base sm:text-lg max-w-[230px] min-w-[230px] sm:m-0 m-auto mt-12 transition delay-50"
+            onClick={() => navigate("/register/aadhaar")}
+          >
             Get Started
           </button>
         </div>
@@ -158,6 +177,17 @@ const Home = () => {
           <img src={heroImg} className="w-[100%]" alt="" />
         </div>
       </div>
+      {upButton && (
+        <div
+          className={`w-[60px] h-[60px] bg-[royalblue] fixed transition-opacity duration-300 ease-in right-3 bottom-1/4 border-2 border-[white] border-solid sm:hidden ${
+            upButton ? "opacity-100" : "opacity-0"
+          }`}
+          onClick={scrollToTop}
+          style={{ transition: "opacity 0.3s ease" }}
+        >
+          <BsChevronUp size={45} color="#ffffff" className="m-auto mt-1" />
+        </div>
+      )}
 
       {/* Section 2 */}
       <div className="grid sm:grid-cols-3 grid-cols-1 bg-secondary text-[white] py-8">
@@ -290,7 +320,7 @@ const Home = () => {
         <div className="flex w-full justify-center py-4">
           <img src={quote} alt="quote" className="w-[50px] opacity-40" />
         </div>
-        <div className="max-w-screen-xl  py-4 sm:py-14 container mx-auto px-3">
+        <div className="max-w-screen-xl  py-4 sm:py-14 container mx-auto px-10">
           <Slider {...Settings2}>
             <div>
               <div className="flex flex-col items-center justify-center">

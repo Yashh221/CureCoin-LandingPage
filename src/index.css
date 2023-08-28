@@ -5,6 +5,14 @@
         font-family: 'lucida_consoleregular', sans-serif;
         
       }
+      @media only screen and (max-width: 768px) {
+        body {
+          orientation: portrait;
+          /* transform: rotate(0deg);
+          overflow: hidden;
+          position: fixed; */
+        }
+      }
       
       @font-face {
         font-family: 'lucida_consoleregular';
