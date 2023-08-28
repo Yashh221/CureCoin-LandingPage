@@ -7,11 +7,11 @@ const PanVerify = () => {
   return (
     <React.Fragment>
         <div className="w-full">
-          <div className="flex flex-col space-y-2 text-tertiary pr-10">
-            <span className="text-3xl tracking-wider  font-semibold">
+          <div className="flex flex-col space-y-2 text-tertiary sm:pr-10">
+            <span className="text-2xl sm:text-3xl tracking-wider  font-semibold">
               Verify Pan Card
             </span>
-            <span className="text-lg tracking-wider">
+            <span className="text-base sm:text-lg tracking-wider">
             Verify your pan card.
             </span>
           </div>
@@ -20,13 +20,13 @@ const PanVerify = () => {
               <input
                 type="text"
                 placeholder="Pan Card No"
-                className="text-lg text-tertiary h-full px-4 placeholder:text-tertiary bg-transparent outline-none w-full"
+                className="text-base sm:text-lg text-tertiary h-full px-4 placeholder:text-tertiary bg-transparent outline-none w-full"
               />
             </div>
             <div className="flex justify-center items-center h-[155px] max-w-[650px] border-2 border-solid border-tertiary w-full my-3">
             <label
                   htmlFor="pancard"
-                  className="cursor-pointer text-tertiary text-lg tracking-wide"
+                  className="cursor-pointer text-tertiary text-base sm:text-lg tracking-wide"
                 >
                   Choose File
                 </label>
