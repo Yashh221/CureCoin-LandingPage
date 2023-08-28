@@ -83,7 +83,7 @@ const Home = () => {
     {
       title: "Apply Online",
       description:
-        "Experience a seamless journey to wellness with CureCoin's partnered hospital. When you visit, simply submit the necessary documents, and our team will carefully review your profile and eligibility. ensuring you receive the care you deserve",
+        "Experience a seamless journey to wellness with CureCoin's partnered hospital. When you visit, simply submit the necessary documents, and our team will carefully review your profile and eligibility. ensuring you receive the care you deserve.",
       img: checkImg,
     },
     {
@@ -166,11 +166,10 @@ const Home = () => {
               <img src={item.img} alt="" className="w-[100px]" />
             </div>
             <p className="flex flex-col text-2xl p-4 font-bold tracking-wide text-center">
-              <span className="mr-5">{item.title.split(" ")[0]}</span>
-              <span>{item.title.split(" ")[1]}</span>
+              <span className="mr-5">{item.title}</span>
             </p>
 
-            <p className="text-lg md:px-5">{item.description}</p>
+            <p className="text-lg md:px-3">{item.description}</p>
           </div>
         ))}
       </div>
