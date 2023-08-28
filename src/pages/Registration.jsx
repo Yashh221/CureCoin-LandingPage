@@ -5,6 +5,7 @@ import checkImg from "./../assets/check.svg";
 import thumbImg from "./../assets/thumb.svg";
 import medicineImg from "./../assets/medicine.svg";
 import Aadhar from "./RegistrationPages/Aadhar";
+import ProgressBar from "../Components/ProgressBar";
 
 const section = [
     {
@@ -28,6 +29,7 @@ const section = [
   ];
 
 const Registration = () => {
+  const [currentStep, setcurrentStep] = React.useState(1)
   return (
     <React.Fragment>
       <header>
@@ -35,12 +37,12 @@ const Registration = () => {
       </header>
       <main className="grid grid-rows-3" style={{gridTemplateRows:"auto 6px auto"}}>
         <div className="grid sm:grid-cols-3 grid-cols-1">
-            <div className="bg-primary text-tertiary w-full flex justify-center items-center ">
+            <div className="bg-primary text-tertiary w-full flex justify-start p-[70px] ">
                 <span>
-                    Progress Bar
+                    <ProgressBar currentStep={currentStep}/>
                 </span>
             </div>
-            <div className="bg-secondary pt-[80px] pb-[130px] px-[100px] col-span-2">
+            <div className="bg-secondary pt-[80px] px-[100px] col-span-2">
                 <Aadhar/>
             </div>
         </div>
@@ -52,10 +54,9 @@ const Registration = () => {
               <img src={item.img} alt="" className="w-[100px]" />
             </div>
             <p className="flex flex-col text-2xl p-4 font-bold tracking-wide text-center">
-              <span className="mr-5">{item.title.split(" ")[0]}</span>
-              <span>{item.title.split(" ")[1]}</span>
+              <span className="mr-5">{item.title}</span>
             </p>
-            <p className="text-lg md:px-5">{item.description}</p>
+            <p className="text-lg md:px-3">{item.description}</p>
           </div>
         ))}
       </div>   
