@@ -1,18 +1,10 @@
 import React from "react";
-import BankStatement from "./BankStatement";
+import {useNavigate} from 'react-router-dom'
+const AddressProof = () => {
+  let navigate = useNavigate()
 
-const AddressProof = ({ showAddressProof }) => {
-  const [showCurrentForm, setShowCurrentForm] =
-    React.useState(showAddressProof);
-  const [showNextForm, setShowNextForm] = React.useState(false);
-
-  const handleNextForm = () => {
-    setShowCurrentForm(false);
-    setShowNextForm(true);
-  };
   return (
     <React.Fragment>
-      {showCurrentForm && (
         <div className="w-full">
           <div className="flex flex-col space-y-2 text-tertiary pr-10">
             <span className="text-3xl tracking-wider  font-semibold">
@@ -40,13 +32,11 @@ const AddressProof = ({ showAddressProof }) => {
           </form>
           <button
             className="w-[150px] h-[40px] mt-[20px] mb-[120px] font-bold text-tertiary hover:text-red-600 bg-red-600 hover:border-2 hover:border-solid hover:border-red-600 hover:bg-tertiary text-xl"
-            onClick={handleNextForm}
+            onClick={()=>navigate("/register/bankstatement")}
           >
             Next
           </button>
         </div>
-      )}
-      {showNextForm && <BankStatement showForm={showNextForm}/>}
     </React.Fragment>
   );
 };

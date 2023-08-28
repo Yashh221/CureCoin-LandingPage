@@ -1,17 +1,10 @@
 import React from "react";
-import YourAddress from "./Address";
+import {useNavigate} from 'react-router-dom'
+const AddPhoto = () => {
+  let navigate = useNavigate()
 
-const AddPhoto = ({showAddPhoto}) => {
-    const[showAddPhotoForm, setShowAddPhotoForm] = React.useState(showAddPhoto)
-    const [showAddress, setShowAddress] = React.useState(false);
-    
-      const handleNextForm = () => {
-        setShowAddPhotoForm(false)
-        setShowAddress(true);
-      };
     return (
     <React.Fragment>
-        {showAddPhotoForm && 
       <div className="w-full">
         <div className="flex flex-col space-y-2 text-tertiary">
           <span className="text-3xl tracking-wider  font-semibold">
@@ -32,13 +25,11 @@ const AddPhoto = ({showAddPhoto}) => {
         </form>
         <button
           className="w-[150px] h-[40px] mt-[180px] font-bold text-tertiary hover:text-red-600 bg-red-600 hover:border-2 hover:border-solid hover:border-red-600 hover:bg-tertiary text-lg"
-          onClick={handleNextForm}
+          onClick={()=>navigate("/register/address")}
         >
           Next
         </button>
       </div>
-}
-      {showAddress && <YourAddress showAddress = {showAddress}/>}
     </React.Fragment>
   );
 };

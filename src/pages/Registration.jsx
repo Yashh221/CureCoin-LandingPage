@@ -28,7 +28,7 @@ const section = [
     },
   ];
 
-const Registration = () => {
+const Registration = ({children}) => {
   const [currentStep, setcurrentStep] = React.useState(1)
   return (
     <React.Fragment>
@@ -43,7 +43,7 @@ const Registration = () => {
                 </span>
             </div>
             <div className="bg-secondary pt-[80px] px-[100px] col-span-2">
-                <Aadhar/>
+                {children}
             </div>
         </div>
         <hr className="bg-[white] w-full h-[5px] z-10"/>

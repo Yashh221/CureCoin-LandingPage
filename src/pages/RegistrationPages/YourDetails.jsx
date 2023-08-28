@@ -1,17 +1,11 @@
 import React from "react";
-import VerifyPhnNumber from "./VerifyPhnNumber";
+import { useNavigate } from "react-router-dom";
 
 const YourDetails = ({ showDetails }) => {
-  const [showDetailsForm, setShowDetailsForm] =
-    React.useState(showDetails);
-    const [showVerifyNumber, setshowVerifyNumber] = React.useState(false)
-    const handleNextForm = () => {
-        setShowDetailsForm(false)
-        setshowVerifyNumber(true)
-    }
+  let navigate = useNavigate()
+
   return (
     <React.Fragment>
-      {showDetailsForm && (
         <div className="w-full">
           <div className="flex flex-col space-y-2 text-tertiary pr-10">
             <span className="text-3xl tracking-wider  font-semibold">
@@ -59,14 +53,10 @@ const YourDetails = ({ showDetails }) => {
             </div>
           </form>
           <button className="w-[150px] h-[40px] mt-[40px] mb-[60px] font-bold font-sans text-tertiary hover:text-red-600 hover:border-2 hover:border-solid hover:border-red-600 bg-red-600 hover:bg-tertiary text-xl" 
-          onClick={handleNextForm}>
+          onClick={()=>navigate("/register/verifynumber")}>
             Next
           </button>
         </div>
-      )}
-      {
-        showVerifyNumber && <VerifyPhnNumber showVerifyNumber={showVerifyNumber}/>
-      }
     </React.Fragment>
   );
 };

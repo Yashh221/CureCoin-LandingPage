@@ -1,18 +1,10 @@
 import React from "react";
-import PanVerify from "./PanVerify";
-
+import {useNavigate} from 'react-router-dom'
 const IncomeDetails = ({ showIncomeDetails }) => {
-  const [showIncomeDetailsForm, setShowIncomeDetailsForm] =
-    React.useState(showIncomeDetails);
-  const [showPanVerify, setPanVerify] = React.useState(false);
+  let navigate = useNavigate()
 
-  const handleNextForm = () => {
-    setShowIncomeDetailsForm(false);
-    setPanVerify(true);
-  };
   return (
     <React.Fragment>
-      {showIncomeDetailsForm && (
         <div className="w-full">
           <div className="flex flex-col space-y-2 text-tertiary pr-10">
             <span className="text-3xl tracking-wider  font-semibold">
@@ -40,13 +32,11 @@ const IncomeDetails = ({ showIncomeDetails }) => {
           </form>
           <button
             className="w-[150px] h-[40px] mt-[120px] mb-[120px] font-bold text-tertiary hover:text-red-600 bg-red-600 hover:border-2 hover:border-solid hover:border-red-600 hover:bg-tertiary text-lg"
-            onClick={handleNextForm}
+            onClick={()=>navigate("/register/panverify")}
           >
             Next
           </button>
         </div>
-      )}
-      {showPanVerify && <PanVerify showPanVerify={showPanVerify} />}
     </React.Fragment>
   );
 };

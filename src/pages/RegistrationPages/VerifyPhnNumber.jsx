@@ -1,18 +1,10 @@
 import React from "react";
-import AddPhoto from "./AddPhoto";
-
+import {useNavigate} from 'react-router-dom'
 const VerifyPhnNumber = ({ showVerifyNumber }) => {
-  const [showVerifyNumberForm, setShowVerifyNumberForm] =
-    React.useState(showVerifyNumber);
-  const [showAddPhoto, setshowAddPhoto] = React.useState(false);
+  let navigate = useNavigate()
 
-  const handleNextForm = () => {
-    setShowVerifyNumberForm(false);
-    setshowAddPhoto(true);
-  };
   return (
     <React.Fragment>
-      {showVerifyNumberForm && (
         <div className="w-full">
           <div className="flex flex-col space-y-2 text-tertiary pr-10">
             <span className="text-3xl tracking-wider  font-semibold">
@@ -34,13 +26,11 @@ const VerifyPhnNumber = ({ showVerifyNumber }) => {
           </form>
           <button
             className="w-[150px] h-[40px] mt-[130px] font-bold text-tertiary hover:text-red-600 bg-red-600 hover:border-2 hover:border-solid hover:border-red-600 hover:bg-tertiary text-lg"
-            onClick={handleNextForm}
+            onClick={()=>navigate("/register/addphoto")}
           >
             Verify
           </button>
         </div>
-      )}
-      {showAddPhoto && <AddPhoto showAddPhoto={showAddPhoto}/>}
     </React.Fragment>
   );
 };
