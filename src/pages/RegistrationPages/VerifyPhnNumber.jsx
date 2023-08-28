@@ -25,7 +25,7 @@ const VerifyPhnNumber = ({ showVerifyNumber }) => {
             </div>
           </form>
           <button
-            className="w-[150px] h-[40px] mt-[100px] sm:mt-[130px] mb-[60px] sm:mb-0 font-bold text-tertiary hover:text-red-600 bg-red-600 hover:border-2 hover:border-solid hover:border-red-600 hover:bg-tertiary text-lg"
+            className="w-[150px] h-[40px] mt-[100px] sm:mt-[130px] mb-[80px] sm:mb-0 font-bold text-tertiary hover:text-red-600 bg-red-600 hover:border-2 hover:border-solid hover:border-red-600 hover:bg-tertiary text-lg"
             onClick={()=>navigate("/register/addphoto")}
           >
             Verify

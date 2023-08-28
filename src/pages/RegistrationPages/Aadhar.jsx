@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { FormContext } from "../../Contexts/FormContext";
 import axios from "axios";
 
@@ -24,7 +25,6 @@ const Aadhar = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
           withCredentials: "include",
         }
@@ -68,20 +68,21 @@ const Aadhar = () => {
               type="text"
               placeholder="Aadhar Number"
               className="text-base sm:text-lg text-tertiary h-full px-4 placeholder:text-tertiary bg-transparent outline-none w-full"
-              // value={aadhaar}
-              // onChange={(e) => setAadhaar(e.target.value)}
-              // required
+              value={aadhaar}
+              onChange={(e) => setAadhaar(e.target.value)}
+              required
             />
           </div>
-        </form>
         <button
-          // type="submit"
+          type="submit"
           onClick={()=>navigate("/register/verifyaadhaar")}
           className="w-[150px] h-[40px] mt-[80px] mb-[60px] sm:mb-0 sm:mt-[180px] font-bold text-tertiary hover:text-red-600 bg-red-600 hover:border-2 hover:border-solid hover:border-red-600 hover:bg-tertiary text-lg"
-        >
+          >
           Proceed
         </button>
+          </form>
       </div>
+      <ToastContainer/>
     </React.Fragment>
   );
 };
