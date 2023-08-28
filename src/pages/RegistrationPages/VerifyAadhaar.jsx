@@ -1,18 +1,10 @@
 import React from "react";
-import YourDetails from "./YourDetails";
+import { useNavigate } from "react-router-dom";
 
 const VerifyAadhar = ({ showVerifyAadhaar }) => {
-  const [showVerifyAadhaarForm, setShowVerifyAadhaarForm] =
-    React.useState(showVerifyAadhaar);
-    const [showDetails, setshowDetails] = React.useState(false)
-
-    const handleNextForm = () =>{
-        setShowVerifyAadhaarForm(false)
-        setshowDetails(true)
-    }
+ let navigate = useNavigate()
   return (
     <React.Fragment>
-      {showVerifyAadhaarForm && (
         <div className="w-full">
           <div className="flex flex-col space-y-2 text-tertiary pr-10">
             <span className="text-3xl tracking-wider  font-semibold">
@@ -33,14 +25,10 @@ const VerifyAadhar = ({ showVerifyAadhaar }) => {
             </div>
           </form>
           <button className="w-[150px] h-[40px] mt-[148px] font-bold text-tertiary hover:text-red-600 bg-red-600 hover:bg-tertiary text-lg"
-          onClick={handleNextForm}>
+          onClick={()=>navigate("/register/yourdetails")}>
             Verify
           </button>
         </div>
-      )}
-      {
-        showDetails && <YourDetails showDetails={showDetails}/>
-      }
     </React.Fragment>
   );
 };

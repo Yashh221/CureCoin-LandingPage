@@ -1,18 +1,11 @@
 import React from "react";
-import AddressProof from "./AddressProof";
+import {useNavigate} from 'react-router-dom'
 
-const PanVerify = ({ showPanVerify }) => {
-  const [showPanVerifyForm, setShowPanVerifyForm] =
-    React.useState(showPanVerify);
-  const [showAddressProof, setshowAddressProof] = React.useState(false);
+const PanVerify = () => {
+  let navigate = useNavigate()
 
-  const handleNextForm = () => {
-    setShowPanVerifyForm(false);
-    setshowAddressProof(true);
-  };
   return (
     <React.Fragment>
-      {showPanVerifyForm && (
         <div className="w-full">
           <div className="flex flex-col space-y-2 text-tertiary pr-10">
             <span className="text-3xl tracking-wider  font-semibold">
@@ -47,13 +40,11 @@ const PanVerify = ({ showPanVerify }) => {
           </form>
           <button
             className="w-[150px] h-[40px] mt-[20px] mb-[60px] font-bold text-tertiary hover:text-red-600 bg-red-600 hover:border-2 hover:border-solid hover:border-red-600 hover:bg-tertiary text-xl"
-            onClick={handleNextForm}
+            onClick={()=>navigate("/register/addressproof")}
           >
             Next
           </button>
         </div>
-      )}
-      {showAddressProof && <AddressProof showAddressProof={showAddressProof}/>}
     </React.Fragment>
   );
 };

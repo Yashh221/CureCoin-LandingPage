@@ -1,17 +1,11 @@
 import React from "react";
-import EmploymentDetails from "./EmploymentDetails";
+import { useNavigate } from "react-router-dom";
 
-const YourAddress = ({ showAddress }) => {
-  const [showAddressForm, setShowAddressForm] =
-    React.useState(showAddress);
-    const [showEmploymentDetails, setshowEmploymentDetails] = React.useState(false)
-    const handleNextForm = () => {
-        setShowAddressForm(false)
-        setshowEmploymentDetails(true)
-    }
+const YourAddress = () => {
+  let navigate = useNavigate()
+
   return (
     <React.Fragment>
-      {showAddressForm && (
         <div className="w-full">
           <div className="flex flex-col space-y-2 text-tertiary pr-10">
             <span className="text-3xl tracking-wider  font-semibold">
@@ -59,15 +53,11 @@ const YourAddress = ({ showAddress }) => {
             </div>
           </form>
           <button className="w-[150px] h-[40px] mt-[40px] mb-[80px] font-bold font-sans text-tertiary hover:text-red-600 hover:border-2 hover:border-solid hover:border-red-600 bg-red-600 hover:bg-tertiary text-xl" 
-          onClick={handleNextForm}
+          onClick={()=>navigate("/register/employmentdetails")}
         >
             Next
           </button>
         </div>
-      )}
-      {
-        showEmploymentDetails && <EmploymentDetails showEmploymentDetails={showEmploymentDetails}/>
-      }
     </React.Fragment>
   );
 };

@@ -149,7 +149,7 @@ const Home = () => {
           </p>
           <hr className="w-full mt-0 bg-[white]" />
           <button className="px-4 py-2 mb-4 bg-[#F8F7F3] hover:bg-secondary hover:text-white text-primary text-lg max-w-[230px] min-w-[230px] sm:m-0 m-auto mt-12 transition delay-50"
-          onClick={()=>navigate("/register")}>
+          onClick={()=>navigate("/register/aadhaar")}>
             Get Started
           </button>
         </div>
