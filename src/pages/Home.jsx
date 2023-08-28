@@ -13,11 +13,8 @@ import quote from "../assets/quote.svg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { GrNext, GrPrevious } from "react-icons/gr";
-import { AiOutlineRight } from "react-icons/ai";
 import Lightbox from "react-18-image-lightbox";
 import "react-18-image-lightbox/style.css";
-import rightArrow from "../assets/right-arrow.svg";
-import leftArrow from "../assets/left-arrow.svg";
 
 import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
@@ -51,18 +48,21 @@ const Home = () => {
     trasition: "color 0.3s ease",
   };
   const Settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToShow: window.innerWidth > 728 ? 4 : 1,
+    slidesToScroll: window.innerWidth > 728 ? 4 : 1,
     nextArrow: (
       <GrNext
         className=" z-10 ring-1 ring-black hover:ring-[#000000] hover:shadow-md"
         style={arrowStyles}
       />
     ),
-    prevArrow: <prevArrow />,
+    prevArrow: <GrPrevious
+    className=" z-10 ring-1 ring-black hover:ring-[#000000] hover:shadow-md"
+    style={arrowStyles}
+  />,
   };
 
   const Settings2 = {
@@ -77,6 +77,7 @@ const Home = () => {
       color: "#ffffff",
       width: "40px",
     },
+    
   };
 
   const section2Data = [
@@ -125,7 +126,7 @@ const Home = () => {
     };
   }, []);
   return (
-    <div className="w-full">
+    <div className="w-full overflow-x-hidden">
       {/* Section 1 */}
       <header
         className={`w-full fixed  ${isScrolled ? "top-[-75px] " : "top-0"}`}
@@ -138,17 +139,17 @@ const Home = () => {
         <div className="sm:hidden block col-span-3">
           <img src={heroImg} className="w-[100%]" alt="" />
         </div>
-        <div className="sm:col-span-1 col-span-3 bg-primary flex flex-col space-y-8 justify-center px-10 pl-12 sm:pt-0 pt-[60px] pb-5">
-          <h1 className="text-3xl lg:text-[42px] text-[white] font-[800] font-sans leading-[1.1em] mb-4">
+        <div className="sm:col-span-1 col-span-3 bg-[royalblue] flex flex-col space-y-8 justify-center text-center sm:text-left tracking-wider px-14 sm:pl-12 sm:pt-0 pt-[60px] pb-14 sm:pb-5">
+          <h1 className="text-4xl lg:text-[42px] text-[white] font-[1000] font-sans leading-[1.1em]">
             HEALTH CARE EMPOWERED
           </h1>
-          <hr className="w-full bg-[white]" />
-          <p className=" text-xl lg:text-[25px] text-[white] tracking-widest leading-[40px]">
+          <hr className="bg-[white] -mb-5" />
+          <p className=" text-lg sm:text-xl lg:text-[25px] text-[white] tracking-wider align-top place-content-start sm:tracking-widest t-0 leading- sm:leading-[40px] -my-4">
             Transforming <br />
             Healthcare Finance
           </p>
-          <hr className="w-full mt-0 bg-[white]" />
-          <button className="px-4 py-2 mb-4 bg-[#F8F7F3] hover:bg-secondary hover:text-white text-primary text-lg max-w-[230px] min-w-[230px] sm:m-0 m-auto mt-12 transition delay-50"
+          <hr className="-mt-8 sm:mt-0 bg-[white]" />
+          <button className="px-4 py-2 mb-[50px] sm:mb-4 bg-[#F8F7F3]  hover:bg-secondary hover:text-white text-[royalblue] text-base sm:text-lg max-w-[230px] min-w-[230px] sm:m-0 m-auto mt-12 transition delay-50"
           onClick={()=>navigate("/register/aadhaar")}>
             Get Started
           </button>
@@ -176,13 +177,13 @@ const Home = () => {
 
       {/* Section 3 */}
       {domLoaded && (
-        <div className="container mx-auto px-3 py-8">
-          <h1 className="text-2xl lg:text-[45px] font-normal py-8 text-center text-primary tracking-wider">
+        <div className="container mx-auto px-3 py-1 sm:py-8">
+          <h1 className="text-3xl lg:text-[45px] font-normal py-8 text-center text-[royalblue] tracking-wider">
             SURGERIES MADE AFFORDABLE
           </h1>
-          <div className="max-w-[1200px] mx-auto py-10 pb-4">
-            <Slider {...Settings} className=" w-full pb-[30px] px-14 sm:px-4">
-              <div className="px-5">
+          <div className="lg:max-w-[1200px] max-w-[300px] w-full mx-auto py-10 pb-4 ">
+            <Slider {...Settings} className="w-full pb-[30px] px-10 sm:px-4">
+              <div className="sm:px-5">
                 <div
                   className="rounded-full overflow-hidden cursor-pointer relative group"
                   onClick={openLightbox}
@@ -191,7 +192,7 @@ const Home = () => {
                   <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
                 </div>
               </div>
-              <div className="px-5">
+              <div className="sm:px-5">
                 <div
                   className="rounded-full overflow-hidden cursor-pointer relative group"
                   onClick={openLightbox}
@@ -200,7 +201,7 @@ const Home = () => {
                   <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
                 </div>
               </div>
-              <div className="px-5">
+              <div className="sm:px-5">
                 <div
                   className="rounded-full overflow-hidden cursor-pointer relative group"
                   onClick={openLightbox}
@@ -209,7 +210,7 @@ const Home = () => {
                   <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
                 </div>
               </div>
-              <div className="px-5">
+              <div className="sm:px-5">
                 <div
                   className="rounded-full overflow-hidden cursor-pointer relative group"
                   onClick={openLightbox}
@@ -218,7 +219,7 @@ const Home = () => {
                   <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
                 </div>
               </div>
-              <div className="px-5">
+              <div className="sm:px-5">
                 <div
                   className="rounded-full overflow-hidden cursor-pointer relative group"
                   onClick={openLightbox}
@@ -227,7 +228,7 @@ const Home = () => {
                   <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
                 </div>
               </div>
-              <div className="px-5">
+              <div className="sm:px-5">
                 <div
                   className="rounded-full overflow-hidden cursor-pointer relative group"
                   onClick={openLightbox}
@@ -250,34 +251,34 @@ const Home = () => {
       )}
 
       {/* Section 4 */}
-      <div className="bg-primary mt-10 py-12">
+      <div className="bg-[#155de9] mt-10 py-12">
         <div className="container mx-auto px-3">
-          <h1 className="text-2xl lg:text-[45px] font-normal text-center text-[white] tracking-wider">
+          <h1 className="text-3xl lg:text-[45px] font-normal text-center text-tertiary tracking-wider">
             HEALTHCARE PARTNERS
           </h1>
-          <div className="grid grid-cols-4 px-14 py-6">
-            <div className="col-span-1 flex justify-center items-center p-5">
+          <div className="grid grid-cols-2 sm:grid-cols-4 px-14 py-6 space-y-7">
+            <div className="col-span-1 flex justify-center items-center sm:p-5">
               <img src={partnerImg} className="w-full max-w-[150px]" alt="" />
             </div>
-            <div className="col-span-1 flex justify-center items-center p-5">
+            <div className="col-span-1 flex justify-center items-center sm:p-5">
               <img src={partnerImg} className="w-full max-w-[150px]" alt="" />
             </div>
-            <div className="col-span-1 flex justify-center items-center p-5">
+            <div className="col-span-1 flex justify-center items-center sm:p-5">
               <img src={partnerImg} className="w-full max-w-[150px]" alt="" />
             </div>
-            <div className="col-span-1 flex justify-center items-center p-5">
+            <div className="col-span-1 flex justify-center items-center sm:p-5">
               <img src={partnerImg} className="w-full max-w-[150px]" alt="" />
             </div>
-            <div className="col-span-1 flex justify-center items-center p-5">
+            <div className="col-span-1 flex justify-center items-center sm:p-5">
               <img src={partnerImg} className="w-full max-w-[150px]" alt="" />
             </div>
-            <div className="col-span-1 flex justify-center items-center p-5 ">
+            <div className="col-span-1 flex justify-center items-center sm:p-5 ">
               <img src={partnerImg} className="w-full max-w-[150px]" alt="" />
             </div>
-            <div className="col-span-1 flex justify-center items-center p-5">
+            <div className="col-span-1 flex justify-center items-center sm:p-5">
               <img src={partnerImg} className="w-full max-w-[150px]" alt="" />
             </div>
-            <div className="col-span-1 flex justify-center items-center p-5 ">
+            <div className="col-span-1 flex justify-center items-center sm:p-5 ">
               <img src={partnerImg} className="w-full max-w-[150px]" alt="" />
             </div>
           </div>
@@ -285,45 +286,45 @@ const Home = () => {
       </div>
 
       {/* Section 5 */}
-      <div className="bg-secondary text-[white] py-[100px]">
+      <div className="bg-secondary text-tertiary py-[70px] sm:py-[100px]">
         <div className="flex w-full justify-center py-4">
           <img src={quote} alt="quote" className="w-[50px] opacity-40" />
         </div>
-        <div className="max-w-screen-xl  py-14 container mx-auto px-3">
+        <div className="max-w-screen-xl  py-4 sm:py-14 container mx-auto px-3">
           <Slider {...Settings2}>
             <div>
               <div className="flex flex-col items-center justify-center">
-                <p className="md:w-[50%] w-[80%] text-center text-xl lg:text-3xl tracking-wide">
-                  Testimonials are a great way to share positive feedback you
+                <p className="md:w-[50%] w-[80%] text-center text-lg lg:text-3xl tracking-wide">
+                  "Testimonials are a great way to share positive feedback you
                   have received and encourage others to work with you. Add your
-                  own here.
+                  own here."
                 </p>
                 <div className="mt-[30px] flex gap-[20px] items-center py-3">
-                  <p className="text-xl">Claire Brooks, MI</p>
+                  <p className="text-base sm:text-xl">Claire Brooks, MI</p>
                 </div>
               </div>
             </div>
             <div>
               <div className="flex flex-col items-center justify-center">
-                <p className="md:w-[50%] w-[80%] text-center text-3xl tracking-wide">
-                  Testimonials are a great way to share positive feedback you
+                <p className="md:w-[50%] w-[80%] text-center text-lg lg:text-3xl tracking-wide">
+                  "Testimonials are a great way to share positive feedback you
                   have received and encourage others to work with you. Add your
-                  own here.
+                  own here."
                 </p>
                 <div className="mt-[30px] flex gap-[20px] items-center py-3">
-                  <p className="text-xl">Claire Brooks, MI</p>
+                  <p className="text-base sm:text-xl">Claire Brooks, MI</p>
                 </div>
               </div>
             </div>
             <div>
               <div className="flex flex-col items-center justify-center">
-                <p className="md:w-[50%] w-[80%] text-center text-3xl tracking-wide">
-                  Testimonials are a great way to share positive feedback you
+                <p className="md:w-[50%] w-[80%] text-center text-lg lg:text-3xl tracking-wide">
+                  "Testimonials are a great way to share positive feedback you
                   have received and encourage others to work with you. Add your
-                  own here.
+                  own here."
                 </p>
                 <div className="mt-[30px] flex gap-[20px] items-center py-3">
-                  <p className="text-xl">Claire Brooks, MI</p>
+                  <p className="text-base sm:text-xl">Claire Brooks, MI</p>
                 </div>
               </div>
             </div>

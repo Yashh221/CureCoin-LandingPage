@@ -39,7 +39,7 @@ const Header = () => {
         </a>
       </div>
       <button
-        className="lg:hidden hover:text-blue-200 fixed right-8"
+        className="lg:hidden hover:text-blue-200 fixed right-3"
         onClick={toggleSidebar}
       >
         <Hamburger
@@ -52,12 +52,12 @@ const Header = () => {
       </button>
       {isSidebarOpen && (
         <div
-          className={`lg:hidden text-lg flex flex-col justify-center items-center space-y-7 w-full h-screen md:w-[50%] absolute top-[75px] right-0 bg-white p-4 shadow transform transition-transform duration-500 ${
+          className={`lg:hidden text-2xl  flex flex-col justify-start items-center space-y-7 w-full h-screen md:w-[50%] absolute top-[75px] right-0 bg-white p-4 shadow transform transition-transform duration-500 ${
             isSidebarOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
           }`}
         >
           {/* Sidebar links */}
-          <a href="/" className="block text-black hover:text-blue-500 my-2">
+          <a href="/" className="block text-[royalblue] hover:text-blue-500 my-2 mt-[70px] ">
             Home
           </a>
           <a href="/" className="block text-black hover:text-blue-500 my-2">
@@ -70,7 +70,7 @@ const Header = () => {
             Contact Us
           </a>
           <a href="/" className="block text-black hover:text-blue-500 my-2">
-            Help
+            Get Started
           </a>
         </div>
       )}
