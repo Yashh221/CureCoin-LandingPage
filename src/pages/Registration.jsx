@@ -32,7 +32,7 @@ const Registration = ({children}) => {
     const [isScrolled, setIsScrolled] = React.useState(false);
   
     const handleScroll = () => {
-      if (window.scrollY > 100) {
+      if (window.scrollY > 80) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
@@ -48,7 +48,7 @@ const Registration = ({children}) => {
   const {currentStep} = React.useContext(FormContext)
   return (
     <React.Fragment>
-      <header className={`w-full fixed  ${isScrolled ? "top-[-75px] " : "top-0"}`}
+      <header className={`w-full fixed z-10  ${isScrolled ? "top-[-75px] " : "top-0"}`}
         style={{ transition: "top 0.3s" }}>
         <Header />
       </header>
