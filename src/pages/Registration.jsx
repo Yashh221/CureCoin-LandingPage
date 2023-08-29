@@ -5,6 +5,7 @@ import checkImg from "./../assets/check.svg";
 import thumbImg from "./../assets/thumb.svg";
 import medicineImg from "./../assets/medicine.svg";
 import ProgressBar from "../Components/ProgressBar";
+import { FormContext } from "../Contexts/FormContext";
 
 
 const Registration = ({children}) => {
@@ -44,7 +45,7 @@ const Registration = ({children}) => {
       };
     }, []);
   //eslint-disable-next-line
-  const [currentStep, setcurrentStep] = React.useState(1)
+  const {currentStep} = React.useContext(FormContext)
   return (
     <React.Fragment>
       <header className={`w-full fixed  ${isScrolled ? "top-[-75px] " : "top-0"}`}

@@ -1,4 +1,5 @@
 import React from 'react';
+import checkImg from "../assets/check.svg"
 
 const ProgressBar = ({ currentStep }) => {
   const steps = ['Aadhaar Verification', 'Profile Creation', 'Pan Card Verification', 'Document Verification','Congratulations'];
@@ -9,8 +10,9 @@ const ProgressBar = ({ currentStep }) => {
         <div key={index} className="relative flex items-center max-w-[450px] w-full">
             {/* <div> */}
           <div
-            className={`w-12 h-12 border-2 border-tertiary rounded-full px-4`}
+            className={`w-12 h-12 border-2 border-tertiary rounded-full px-2`}
           >
+            { index < currentStep ? <img className =" h-12 w-12" src={checkImg} alt="tick"/> : ""}
           </div>
           <span className="ml-5 text-tertiary text-left text-xl tracking-wide font-semibold">{step}</span>
                       {/* </div> */}
