@@ -51,6 +51,7 @@ const YourAddress = () => {
           : navigate("/register/incomedetails");
       }
     } catch (err) {
+      console.log(err)
       showError(err.response.data.message);
     }
   };
@@ -107,7 +108,7 @@ const YourAddress = () => {
             <select
               type="text"
               name="state"
-              className="text-base sm:text-lg text-tertiary h-full px-4 placeholder:text-tertiary bg-transparent outline-none w-full"
+              className="text-base sm:text-lg text-tertiary h-full px-4 placeholder:text-tertiary bg-secondary outline-none w-full"
               value={location.state}
               onChange={handleChange}
               required
@@ -125,7 +126,7 @@ const YourAddress = () => {
           <div className="flex h-[48px] max-w-[650px] border-2 border-solid border-tertiary w-full my-3">
             <select
               name="city"
-              className="text-base sm:text-lg text-tertiary h-full px-4 placeholder:text-tertiary bg-transparent outline-none w-full"
+              className="text-base sm:text-lg text-tertiary h-full px-4 placeholder:text-tertiary bg-secondary outline-none w-full"
               value={location.city}
               onChange={handleChange}
               required
@@ -156,7 +157,7 @@ const YourAddress = () => {
               type="text"
               placeholder="Residence Type"
               name="residenceType"
-              className="text-base sm:text-lg text-tertiary h-full px-4 placeholder:text-tertiary bg-transparent outline-none w-full"
+              className="text-base sm:text-lg text-tertiary h-full px-4 placeholder:text-tertiary bg-secondary outline-none w-full"
               value={location.residenceType}
               onChange={handleChange}
               required

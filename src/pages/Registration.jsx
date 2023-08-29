@@ -32,7 +32,7 @@ const Registration = ({children}) => {
     const [isScrolled, setIsScrolled] = React.useState(false);
   
     const handleScroll = () => {
-      if (window.scrollY > 500) {
+      if (window.scrollY > 100) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);

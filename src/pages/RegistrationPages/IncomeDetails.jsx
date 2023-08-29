@@ -37,6 +37,7 @@ const IncomeDetails = () => {
         handleNextStep();
       }
     } catch (err) {
+      console.log(err)
       showError(err.response.data.message);
     }
   };

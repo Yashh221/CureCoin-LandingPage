@@ -6,7 +6,7 @@ import axios from "axios";
 
 const VerifyAadhar = () => {
   const [otp, setOtp] = React.useState("");
-  const [custDetails, setCustDetails] = React.useState({ name: "", dob: "" });
+  // const [custDetails, setCustDetails] = React.useState({ name: "", dob: "" });
   const { baseUrl } = React.useContext(FormContext);
   let navigate = useNavigate();
   const { handleNextStep } = React.useContext(FormContext);
@@ -35,12 +35,13 @@ const VerifyAadhar = () => {
       );
       if (response.data.status === "Valid") {
         handleNextStep();
-        setCustDetails({
+        console.log(response.data)
+        const newCustDetails = {
           name: response.data.message.name,
           dob: response.data.message.dob,
-        });
-        console.log(custDetails)
-        navigate("/register/yourdetails", { state: custDetails });
+        };
+        // setCustDetails(newCustDetails);
+        navigate("/register/yourdetails", { state: newCustDetails });
       }
     } catch (err) {
       showError(err.response.data.message);

@@ -85,7 +85,8 @@ const AddPhoto = () => {
         navigate("/register/address");
       }
     } catch (err) {
-      showError(err.response.data.message);
+      console.log(err)
+      showError(err.message);
     }
   };
 
@@ -100,8 +101,8 @@ const AddPhoto = () => {
             Make sure customer is clearly visible in the captured photo.
           </span>
         </div>
-        <form className="py-8" onSubmit={handleSubmit}>
-          <div className="flex h-[450px] w-[450px] rounded-full border-2 border-solid border-tertiary">
+        <form className="py-8 " onSubmit={handleSubmit}>
+          <div className="mx-auto h-[350px] w-[350px] rounded-full border-2 border-solid border-tertiary">
             {imageData ? (
               <img
                 src={imageData}
@@ -113,18 +114,20 @@ const AddPhoto = () => {
             )}
           </div>
           {!imageData ? (
-            <div>
+            <div className="w-full flex justify-center">
               <button
-                className="w-[150px] h-[40px] mt-[100px] sm:mt-[180px] mb-[80px] sm:mb-0 font-bold text-tertiary hover:text-red-600 bg-red-600 hover:border-2 hover:border-solid hover:border-red-600 hover:bg-tertiary text-lg"
+              type="button"
+                className="w-[170px] h-[40px] mx-auto mt-[60px] mb-[20px] font-bold text-tertiary hover:text-red-600 bg-transparent border-2 border-tertiary hover:border-2 hover:border-solid hover:border-red-600  text-lg"
                 onClick={captureImage}
               >
                 Capture Image
               </button>
             </div>
           ) : (
-            <div>
+            <div className="w-full flex justify-center">
               <button
-                className="fw-[150px] h-[40px] mt-[100px] sm:mt-[180px] mb-[80px] sm:mb-0 font-bold text-tertiary hover:text-red-600 bg-red-600 hover:border-2 hover:border-solid hover:border-red-600 hover:bg-tertiary text-lg"
+              type="button"
+                className="w-[170px] h-[40px] mt-[60px] mb-[20px] mx-auto font-bold text-tertiary hover:text-red-600 bg-transparent border-2 border-tertiary hover:border-2 hover:border-solid hover:border-red-600  text-lg"
                 onClick={retakePhoto}
               >
                 Retake Photo
@@ -134,7 +137,7 @@ const AddPhoto = () => {
           <canvas ref={canvasRef} style={{ display: "none" }} />
           <button
             type="submit"
-            className="w-[150px] h-[40px] mt-[100px] sm:mt-[180px] mb-[80px] sm:mb-0 font-bold text-tertiary hover:text-red-600 bg-red-600 hover:border-2 hover:border-solid hover:border-red-600 hover:bg-tertiary text-lg"
+            className="w-[150px] h-[40px] mt-[20px] sm:mt-[80px] mb-[80px] sm:mb-14 font-bold text-tertiary hover:text-red-600 bg-red-600 hover:border-2 hover:border-solid hover:border-red-600 hover:bg-tertiary text-lg"
           >
             Next
           </button>
