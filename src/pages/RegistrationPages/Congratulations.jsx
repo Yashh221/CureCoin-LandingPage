@@ -1,8 +1,11 @@
 import React from 'react'
 import {BsCheck2Circle} from "react-icons/bs"
+import { FormContext } from '../../Contexts/FormContext'
 const Congratulations = () => {
+  const {handleNextStep} = React.useContext(FormContext)
   return (
     <>
+    {handleNextStep()}
     <div className="w-full flex justify-center items-center">
         <div className="grid grid-row-2 sm:grid-cols-2 py-[40px] pb-[90px] sm:py-[80px] px-4 sm:pr-[140px]">
             <div className="ml-auto mr-auto sm:mr-10">

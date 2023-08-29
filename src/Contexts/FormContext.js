@@ -4,7 +4,11 @@ const FormContext = createContext();
 
 const FormProvider = ({ children }) => {
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [currentStep, setCurrentStep] = useState(0)
 
+  const handleNextStep = () =>{
+    setCurrentStep(currentStep + 1)
+  }
   const handleFormSubmit = () => {
     setIsFormSubmitted(true);
   };
@@ -15,7 +19,7 @@ const FormProvider = ({ children }) => {
   console.log("env is ",process.env.REACT_APP_ENV)
 
   return (
-    <FormContext.Provider value={{ isFormSubmitted, handleFormSubmit, baseUrl }}>
+    <FormContext.Provider value={{ isFormSubmitted, handleFormSubmit, baseUrl, currentStep, setCurrentStep, handleNextStep }}>
       {children}
     </FormContext.Provider>
   );

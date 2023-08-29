@@ -61,7 +61,7 @@ const Aadhar = () => {
           </span>
         </div>
         <form className="py-8"
-        //  onSubmit={handleSubmit}
+         onSubmit={handleSubmit}
          >
           <div className="flex h-[48px] max-w-[650px] border-2 border-solid border-tertiary w-full">
             <input
@@ -75,7 +75,7 @@ const Aadhar = () => {
           </div>
         <button
           type="submit"
-          onClick={()=>navigate("/register/verifyaadhaar")}
+          // onClick={()=>navigate("/register/verifyaadhaar")}
           className="w-[150px] h-[40px] mt-[80px] mb-[60px] sm:mb-0 sm:mt-[180px] font-bold text-tertiary hover:text-red-600 bg-red-600 hover:border-2 hover:border-solid hover:border-red-600 hover:bg-tertiary text-lg"
           >
           Proceed
