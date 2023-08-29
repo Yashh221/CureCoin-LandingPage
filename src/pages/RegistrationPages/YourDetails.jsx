@@ -17,7 +17,7 @@ const YourDetails = () => {
     employmentType: "",
   });
   console.log(location)
-  const [verifyKey, setVerifyKey] = React.useState("");
+  // const [verifyKey, setVerifyKey] = React.useState("");
   const { baseUrl } = React.useContext(FormContext);
 
   const showError = (err) => {
@@ -49,13 +49,13 @@ const YourDetails = () => {
       console.log(json);
 
       if (json.status === "Success") {
-        setVerifyKey(json.details);
+        // setVerifyKey(json.details);
         navigate("/register/verifynumber",{
-          state:{verifyKey:verifyKey,phone:info.phone}
+          state:{verifyKey:json.details,phone:info.phone}
         })
       }
     } catch (err) {
-      console.log(err);
+      console.log(err.response);
       showError(err.response.data.message);
     }
   };
@@ -84,7 +84,7 @@ const YourDetails = () => {
         </div>
         <form className="py-8" onSubmit={handleSubmit}>
           <div className="flex h-[48px] max-w-[650px] border-2 border-solid border-tertiary w-full">
-            <div className="text-base sm:text-lg text-tertiary h-full px-4 placeholder:text-tertiary bg-transparent outline-none w-full">
+            <div className="text-base sm:text-lg text-tertiary h-full px-4 placeholder:text-tertiary bg-transparent outline-none w-full p-2">
               {info.name}
             </div>
           </div>
@@ -100,7 +100,7 @@ const YourDetails = () => {
             />
           </div>
           <div className="flex h-[48px] max-w-[650px] border-2 border-solid border-tertiary w-full my-3">
-            <div className="text-base sm:text-lg text-tertiary h-full px-4 placeholder:text-tertiary bg-transparent outline-none w-full">
+            <div className="text-base sm:text-lg text-tertiary h-full px-4 placeholder:text-tertiary bg-transparent outline-none w-full p-2">
               {formatDate(info.dob)}
             </div>
           </div>

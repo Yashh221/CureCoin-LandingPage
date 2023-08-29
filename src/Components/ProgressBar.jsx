@@ -5,7 +5,7 @@ const ProgressBar = ({ currentStep }) => {
   const steps = ['Aadhaar Verification', 'Profile Creation', 'Pan Card Verification', 'Document Verification','Congratulations'];
 
   return (
-    <div className="flex flex-col items-center space-y-10">
+    <div className="flex flex-col items-center space-y-10 relative">
       {steps.map((step, index) => (
         <div key={index} className="relative flex items-center max-w-[450px] w-full">
             {/* <div> */}

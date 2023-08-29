@@ -6,10 +6,8 @@ import axios from "axios";
 const VerifyPhnNumber = () => {
   let navigate = useNavigate();
   let location = useLocation();
-  const verifyKey = location.state.verifyKey;
-  const phone = location.state.phone;
   const [otp, setOtp] = React.useState("");
-
+  console.log(location)
   const { baseUrl } = React.useContext(FormContext);
 
   const showError = (err) => {
@@ -23,9 +21,9 @@ const VerifyPhnNumber = () => {
       const response = await axios.post(
         `${baseUrl}/Hospitals/verifyOtp`,
         {
-          verifyKey: verifyKey,
+          verifyKey: location.state.verifyKey,
           otp: otp,
-          phone: phone,
+          phone: location.state.phone,
         },
         {
           headers: {
@@ -42,6 +40,7 @@ const VerifyPhnNumber = () => {
         navigate("/register/addphoto");
       }
     } catch (err) {
+      console.log(err)
       showError(err.response.data.message);
     }
   };
