@@ -4,6 +4,9 @@ import { FormContext } from "../../Contexts/FormContext";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { format } from "date-fns";
+import "react-toastify/dist/ReactToastify.css";
+import "../../styles/Styles.css";
+import SpinFC from "antd/es/spin";
 
 const YourDetails = () => {
   let navigate = useNavigate();
@@ -16,6 +19,8 @@ const YourDetails = () => {
     maritialStatus: "",
     employmentType: "",
   });
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [isOverlay, setIsOverlay] = React.useState(false);
   console.log(location)
   // const [verifyKey, setVerifyKey] = React.useState("");
   const { baseUrl } = React.useContext(FormContext);
@@ -27,6 +32,7 @@ const YourDetails = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true)
     try {
       const response = await axios.patch(
         `${baseUrl}/Hospitals/add`,
@@ -49,12 +55,18 @@ const YourDetails = () => {
       console.log(json);
 
       if (json.status === "Success") {
+        setIsSubmitting(false);
+        setIsOverlay(true);
+        setTimeout(() => {
+          setIsOverlay(false);
         // setVerifyKey(json.details);
         navigate("/register/verifynumber",{
           state:{verifyKey:json.details,phone:info.phone}
         })
+      },1000)
       }
     } catch (err) {
+      setIsSubmitting(false)
       console.log(err.response);
       showError(err.response.data.message);
     }
@@ -73,7 +85,17 @@ const YourDetails = () => {
 
   return (
     <React.Fragment>
-      <div className="w-full">
+      <div className="w-full relative">
+      {isOverlay && <div className="white-overlay" />}
+        {isSubmitting && (
+          <div className="fixed flex justify-center items-center inset-0 bg-white opacity-40 z-50">
+            <SpinFC
+              size="large"
+              color="#306fc7"
+              style={{ width: "100%", margin: "auto" }}
+            />
+          </div>
+        )}
         <div className="flex flex-col space-y-2 text-tertiary sm:pr-10">
           <span className="text-2xl sm:text-3xl tracking-wider  font-semibold">
             Your Details

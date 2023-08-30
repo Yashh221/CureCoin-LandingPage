@@ -15,6 +15,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import Lightbox from "react-18-image-lightbox";
 import "react-18-image-lightbox/style.css";
+import "../styles/Styles.css";
 
 import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
@@ -23,6 +24,7 @@ import { BsChevronUp } from "react-icons/bs";
 const Home = () => {
   const [domLoaded, setDomLoaded] = useState(false);
   const [upButton, setUpButton] = useState(false);
+  const [isOverlay, setisOverlay] = useState(false)
 
   let navigate = useNavigate();
 
@@ -136,12 +138,14 @@ const Home = () => {
       window.removeEventListener("scroll", handleScroll);
       clearTimeout(timeout);
     };
+    // eslint-disable-next-line
   }, []);
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
   return (
     <div className="w-full overflow-x-hidden">
+      {isOverlay && <div className="white-overlay" />}
       {/* Section 1 */}
       <header
         className={`w-full fixed  ${isScrolled ? "top-[-75px] " : "top-0"}`}
@@ -168,7 +172,14 @@ const Home = () => {
           </div>
           <button
             className="px-4 py-2 mb-[50px] sm:mb-4 bg-[#F8F7F3] hover:bg-secondary hover:text-white text-[royalblue] text-base sm:text-lg max-w-[230px] min-w-[230px] sm:m-0 m-auto mt-12 transition delay-50"
-            onClick={() => navigate("/register/aadhaar")}
+            onClick={() => {
+              setisOverlay(true)
+              setTimeout(()=>{
+                setisOverlay(false)
+                navigate("/register/aadhaar");
+                sessionStorage.setItem("headerTab", "getstarted");
+              },800)
+            }}
           >
             Get Started
           </button>
