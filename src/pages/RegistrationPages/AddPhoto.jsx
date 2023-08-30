@@ -1,12 +1,18 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../../styles/Styles.css";
 import { FormContext } from "../../Contexts/FormContext";
+
 import axios from "axios";
+import SpinFC from "antd/es/spin";
 const AddPhoto = () => {
   let navigate = useNavigate();
   const videoRef = React.useRef(null);
   const canvasRef = React.useRef(null);
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [isOverlay, setIsOverlay] = React.useState(false);
   const [imageData, setImageData] = React.useState(null);
   const [stream, setStream] = React.useState(null);
   const { baseUrl } = React.useContext(FormContext);
@@ -63,9 +69,14 @@ const AddPhoto = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (imageData === "") {
+      toast.error("Please Click an Image", { position: "top-right" });
+      return;
+    }
     const blob = await (await fetch(imageData)).blob();
     const formData = new FormData();
     formData.append("profile", blob);
+    setIsSubmitting(true)
     try {
       const response = await axios.post(
         `${baseUrl}/Hospitals/addProfile`,
@@ -82,17 +93,33 @@ const AddPhoto = () => {
       console.log(json);
 
       if (json.status === "success") {
-        navigate("/register/address");
+        setIsSubmitting(false);
+        setIsOverlay(true);
+        setTimeout(() => {
+          setIsOverlay(false);
+          navigate("/register/address");
+        }, 1000);
       }
     } catch (err) {
-      console.log(err)
+      setIsSubmitting(false);
+      console.log(err);
       showError(err.message);
     }
   };
 
   return (
     <React.Fragment>
-      <div className="w-full">
+      <div className="w-full relative">
+        {isOverlay && <div className="white-overlay" />}
+        {isSubmitting && (
+          <div className="fixed flex justify-center items-center inset-0 bg-white opacity-40 z-50">
+            <SpinFC
+              size="large"
+              color="#306fc7"
+              style={{ width: "100%", margin: "auto" }}
+            />
+          </div>
+        )}
         <div className="flex flex-col space-y-2 text-tertiary">
           <span className="text-2xl sm:text-3xl tracking-wider  font-semibold">
             Add Photo
@@ -102,7 +129,7 @@ const AddPhoto = () => {
           </span>
         </div>
         <form className="py-8 " onSubmit={handleSubmit}>
-          <div className="mx-auto h-[350px] w-[350px] rounded-full border-2 border-solid border-tertiary">
+          <div className="mx-auto h-[300px] w-[300px] rounded-full border-2 border-solid border-tertiary overflow-hidden">
             {imageData ? (
               <img
                 src={imageData}
@@ -110,13 +137,13 @@ const AddPhoto = () => {
                 style={{ transform: "scaleX(-1)" }}
               />
             ) : (
-              <video ref={videoRef} width={640} height={200} autoPlay />
+              <video ref={videoRef} width={640} height={300} autoPlay />
             )}
           </div>
           {!imageData ? (
             <div className="w-full flex justify-center">
               <button
-              type="button"
+                type="button"
                 className="w-[170px] h-[40px] mx-auto mt-[60px] mb-[20px] font-bold text-tertiary hover:text-red-600 bg-transparent border-2 border-tertiary hover:border-2 hover:border-solid hover:border-red-600  text-lg"
                 onClick={captureImage}
               >
@@ -126,7 +153,7 @@ const AddPhoto = () => {
           ) : (
             <div className="w-full flex justify-center">
               <button
-              type="button"
+                type="button"
                 className="w-[170px] h-[40px] mt-[60px] mb-[20px] mx-auto font-bold text-tertiary hover:text-red-600 bg-transparent border-2 border-tertiary hover:border-2 hover:border-solid hover:border-red-600  text-lg"
                 onClick={retakePhoto}
               >
@@ -143,7 +170,7 @@ const AddPhoto = () => {
           </button>
         </form>
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </React.Fragment>
   );
 };

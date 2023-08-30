@@ -1,8 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FormContext } from "../../Contexts/FormContext";
+import "react-toastify/dist/ReactToastify.css";
+import "../../styles/Styles.css";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
+import SpinFC from "antd/es/spin";
 
 const PanVerify = () => {
   let navigate = useNavigate();
@@ -10,6 +13,8 @@ const PanVerify = () => {
   const [pan, setPan] = React.useState("");
   const [selectedFile, setSelectedFile] = React.useState("");
   const [previewUrl, setPreviewUrl] = React.useState(null);
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [isOverlay, setIsOverlay] = React.useState(false);
   const showError = () => {
     toast.error("Pan Card Not Valid", {
       position: "top-right",
@@ -17,6 +22,11 @@ const PanVerify = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (selectedFile === "") {
+      toast.error("Select a file", { position: "top-right" });
+      return;
+    }
+    setIsSubmitting(true)
     const formdata = new FormData();
     formdata.append("pannumber", pan);
     formdata.append("pan", selectedFile);
@@ -36,10 +46,16 @@ const PanVerify = () => {
       console.log(json);
 
       if (json.status === "success") {
+        setIsSubmitting(false);
+        setIsOverlay(true);
+        setTimeout(() => {
+          setIsOverlay(false);
         navigate("/register/addressproof");
         handleNextStep();
+        },1000)
       }
     } catch (err) {
+      setIsSubmitting(false)
       console.log(err);
       showError();
     }
@@ -56,7 +72,17 @@ const PanVerify = () => {
 
   return (
     <React.Fragment>
-      <div className="w-full">
+      <div className="w-full relative">
+      {isOverlay && <div className="white-overlay" />}
+        {isSubmitting && (
+          <div className="fixed flex justify-center items-center inset-0 bg-white opacity-40 z-50">
+            <SpinFC
+              size="large"
+              color="#306fc7"
+              style={{ width: "100%", margin: "auto" }}
+            />
+          </div>
+        )}
         <div className="flex flex-col space-y-2 text-tertiary sm:pr-10">
           <span className="text-2xl sm:text-3xl tracking-wider  font-semibold">
             Verify Pan Card
@@ -92,7 +118,7 @@ const PanVerify = () => {
               id="pancard"
               className="hidden"
               onChange={handleChange}
-              required
+              // required
             />
           </div>
           <button

@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { FormContext } from "../../Contexts/FormContext";
 import { ToastContainer, toast } from "react-toastify";
 import State from "../../data/State";
+import "react-toastify/dist/ReactToastify.css";
+import "../../styles/Styles.css";
+import SpinFC from "antd/es/spin";
 
 const YourAddress = () => {
   let navigate = useNavigate();
@@ -16,6 +19,8 @@ const YourAddress = () => {
     residenceType: "",
   });
   const [cities, setCities] = React.useState([]);
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [isOverlay, setIsOverlay] = React.useState(false);
   const { baseUrl } = React.useContext(FormContext);
 
   const showError = (err) => {
@@ -25,6 +30,7 @@ const YourAddress = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true)
     try {
       const response = await axios.post(
         `${baseUrl}/Hospitals/addcustloc`,
@@ -46,12 +52,18 @@ const YourAddress = () => {
       const json = await response.data;
       console.log(json);
       if (json.status === "success") {
-        sessionStorage.getItem("employmentType") === "Salaried"
-          ? navigate("/register/employmentdetails")
-          : navigate("/register/incomedetails");
+        setIsSubmitting(false);
+        setIsOverlay(true);
+        setTimeout(() => {
+          setIsOverlay(false);
+          sessionStorage.getItem("employmentType") === "Salaried"
+            ? navigate("/register/employmentdetails")
+            : navigate("/register/incomedetails");
+        }, 1000);
       }
     } catch (err) {
-      console.log(err)
+      setIsSubmitting(false);
+      console.log(err);
       showError(err.response.data.message);
     }
   };
@@ -72,7 +84,17 @@ const YourAddress = () => {
 
   return (
     <React.Fragment>
-      <div className="w-full">
+      <div className="w-full relative">
+        {isOverlay && <div className="white-overlay" />}
+        {isSubmitting && (
+          <div className="fixed flex justify-center items-center inset-0 bg-white opacity-40 z-50">
+            <SpinFC
+              size="large"
+              color="#306fc7"
+              style={{ width: "100%", margin: "auto" }}
+            />
+          </div>
+        )}
         <div className="flex flex-col space-y-2 text-tertiary sm:pr-10">
           <span className="text-2xl sm:text-3xl tracking-wider  font-semibold">
             Your Address

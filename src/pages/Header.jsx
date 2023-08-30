@@ -4,10 +4,21 @@ import { Turn as Hamburger } from "hamburger-react";
 
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
+  const [selectedTab, setSelectedTab] = React.useState(sessionStorage.getItem("headerTab") || "home")
+
+  const handleTab = (tab) =>{
+    setSelectedTab(tab)
+    sessionStorage.setItem("headerTab",tab)
+  }
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+
+  React.useEffect(()=>
+  {
+    setSelectedTab(sessionStorage.getItem("headerTab"))
+  },[selectedTab])
   return (
     <div className="flex relative justify-between items-center bg-white h-[75px] px-4">
       <div
@@ -22,19 +33,19 @@ const Header = () => {
         />
       </div>
       <div className="hidden lg:flex space-x-10 pr-12 2xl:text-lg text-base ">
-        <a href="/" className="text-primary hover:text-blue-500">
+        <a href="/" className={`${selectedTab === "home" ? "text-[royalblue]" : "text-black"} hover:text-blue-500`} onClick={()=>handleTab("home")}>
           Home
         </a>
-        <a href="/" className="text-primary hover:text-blue-500">
+        <a href="/" className={`${selectedTab === "about" ? "text-[royalblue]" : "text-black"} hover:text-blue-500`} onClick={()=>handleTab("about")}>
           About
         </a>
-        <a href="/" className="text-primary hover:text-blue-500">
+        <a href="/" className={`${selectedTab === "partner" ? "text-[royalblue]" : "text-black"} hover:text-blue-500`} onClick={()=>handleTab("partner")}>
           Partner
         </a>
-        <a href="/" className="text-primary hover:text-blue-500">
+        <a href="/" className={`${selectedTab === "contact" ? "text-[royalblue]" : "text-black"} hover:text-blue-500`} onClick={()=>handleTab("contact")}>
           Contact Us
         </a>
-        <a href="/" className="text-primary hover:text-blue-500">
+        <a href="/register/aadhaar" className={`${selectedTab === "getstarted" ? "text-[royalblue]" : "text-black"} hover:text-blue-500`} onClick={()=>handleTab("getstarted")}>
           Get Started
         </a>
       </div>
@@ -57,19 +68,19 @@ const Header = () => {
           }`}
         >
           {/* Sidebar links */}
-          <a href="/" className="block text-[royalblue] hover:text-blue-500 my-2 mt-[70px] ">
+          <a href="/" className={`block ${selectedTab === "home" ? "text-[royalblue]" : "text-black"} hover:text-blue-500 my-2 mt-[70px] `} onClick={()=>handleTab("home")}>
             Home
           </a>
-          <a href="/" className="block text-black hover:text-blue-500 my-2">
+          <a href="/" className={`block ${selectedTab === "about" ? "text-[royalblue]" : "text-black"} hover:text-blue-500 my-2`} onClick={()=>handleTab("about")}>
             About
           </a>
-          <a href="/" className="block text-black hover:text-blue-500 my-2">
+          <a href="/" className={`block ${selectedTab === "partner" ? "text-[royalblue]" : "text-black"} hover:text-blue-500 my-2`} onClick={()=>handleTab("partner")}>
             Partner
           </a>
-          <a href="/" className="block text-black hover:text-blue-500 my-2">
+          <a href="/" className={`block ${selectedTab === "contact" ? "text-[royalblue]" : "text-black"} hover:text-blue-500 my-2`} onClick={()=>handleTab("contact")}>
             Contact Us
           </a>
-          <a href="/" className="block text-black hover:text-blue-500 my-2">
+          <a href="/register/aadhaar" className={`block ${selectedTab === "getstarted" ? "text-[royalblue]" : "text-black"} hover:text-blue-500 my-2`} onClick={()=>handleTab("getstarted")}>
             Get Started
           </a>
         </div>
